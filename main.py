@@ -18,7 +18,7 @@ userMasterKey = bytearray()
 userSecretKey = bytearray()
 userPasswordHash = bytearray()
 
-def Auth() -> int:
+def Auth():
 	global db
 	global userMasterKey
 	global userSecretKey
@@ -34,7 +34,7 @@ def Auth() -> int:
 	if not db.Exist(login):
 		print('Такого пользователя не существует\nДля продолжения нажмите ENTER')
 		input()
-		return 0
+		return 
 	
 	password = gp.getpass('Password: ')
 	os.system('cls||clear')
@@ -45,7 +45,7 @@ def Auth() -> int:
 	if userInfo[1] != S.GetHashFromText(password):
 		print('Неправильный пароль\nДля продолжения нажмите ENTER')
 		input()
-		return -1
+		return 
 
 	userSecretKey = userInfo[0]
 	userPasswordHash = userInfo[1]
@@ -54,10 +54,9 @@ def Auth() -> int:
 	userLogin = login
 	
 	auth = True
-	return 1
 
 
-def Register() -> int:
+def Register():
 	global db
 	global userMasterKey
 	global userSecretKey
@@ -73,14 +72,14 @@ def Register() -> int:
 	if db.Exist(login):
 		print('Такого пользователь уже существует\nДля продолжения нажмите ENTER')
 		input()
-		return 0
+		return
 	
 	password = gp.getpass('Password: ')
 
 	if password != gp.getpass('Repeat password: '):
 		print('Пароли не совпадают\nДля продолжения нажмите ENTER')
 		input()
-		return -1
+		return
 
 	userMasterKey = S.GetMasterKey(password, S.GetHashFromText(login))
 	userSecretKey = S.GenerateSecretKey()
@@ -95,10 +94,9 @@ def Register() -> int:
 		os.mkdir(f'./{login}')
 	
 	auth = True
-	return 1
 
 
-def DeleteUser() -> int:
+def DeleteUser():
 	global db
 	global userMasterKey
 	global userSecretKey
@@ -112,7 +110,7 @@ def DeleteUser() -> int:
 	ans = input('Вы уверены, что хотите удалить аккаунт? (y/n):\n')
 	
 	if ans != 'y':
-		return -1
+		return
 
 	db.Remove(userLogin)
 	
@@ -126,8 +124,6 @@ def DeleteUser() -> int:
 	userLogin = ''
 	auth = False
 
-	return 1
-
 
 def ChangeSecretKey():
 	global userSecretKey
@@ -136,7 +132,7 @@ def ChangeSecretKey():
 	ans = input('Вы уверены, что хотите удалить аккаунт? (y/n):\n')
 
 	if ans != 'y':
-		return -1
+		return
 
 	osk = userSecretKey
 	userSecretKey = S.GenerateSecretKey()
@@ -173,7 +169,7 @@ def DeleteNote():
 	ans = input('Вы уверены, что хотите удалить заметку? (y/n):\n')
 
 	if ans != 'y':
-		return -1
+		return
 
 	name = input('Введите имя заметки: ')
 	N.DeleteNote(f'{userPath}/{name}.note')
@@ -183,11 +179,10 @@ def DeleteAllNotes():
 	ans = input('Вы уверены, что хотите удалить все заметки? (y/n):\n')
 
 	if ans != 'y':
-		return -1
+		return
 	
 	shutil.rmtree(userPath)
 	os.mkdir(userPath)
-	return 1
 
 
 def GetNote():
