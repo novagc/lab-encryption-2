@@ -130,14 +130,7 @@ def DeleteUser() -> int:
 
 
 def ChangeSecretKey():
-	global db
-	global userMasterKey
 	global userSecretKey
-	global userPasswordHash
-	global userSalt
-	global userPath
-	global userLogin
-	global auth
 
 	os.system('cls||clear')
 	ans = input('Вы уверены, что хотите удалить аккаунт? (y/n):\n')
@@ -154,15 +147,6 @@ def ChangeSecretKey():
 	
 
 def CreateNote():
-	global db
-	global userMasterKey
-	global userSecretKey
-	global userPasswordHash
-	global userSalt
-	global userPath
-	global userLogin
-	global auth
-
 	os.system('cls||clear')
 
 	buffer = []
@@ -252,18 +236,18 @@ def Main():
 
 				c = input('1) Управление аккаунтом\n2) Работа с заметками\n3) Общее\n> ')
 				
-				if c == '1':
+				if c[0] == '1':
 					while auth:
 						os.system('cls||clear')
 						c = input('1) Удалить аккаунт\n2) Изменить ключ шифрования\n0) Назад\n> ')
-						if c == '1':
+						if c[0] == '1':
 							DeleteUser()
-						elif c == '2':
+						elif c[0] == '2':
 							ChangeSecretKey()
-						elif c == '0':
+						elif c[0] == '0':
 							break
 
-				elif c == '2':
+				elif c[0] == '2':
 					os.system('cls||clear')
 
 					while auth:
@@ -271,28 +255,28 @@ def Main():
 						c = input(
 							'1) Создать заметку\n2) Изменить заметку\n3) Удалить заметку\n4) Удалить все заметки\n5) Получить список заметок\n6) Прочитать конкретную заметку\n0) Назад\n> ')
 						print()
-						if c == '1':
+						if c[0] == '1':
 							CreateNote()
-						elif c == '2':
+						elif c[0] == '2':
 							ChangeNote()
-						elif c == '3':
+						elif c[0] == '3':
 							DeleteNote()
-						elif c == '4':
+						elif c[0] == '4':
 							DeleteAllNotes()
-						elif c == '5':
+						elif c[0] == '5':
 							GetAllNotes()
-						elif c == '6':
+						elif c[0] == '6':
 							GetNote()
-						elif c == '0':
+						elif c[0] == '0':
 							break
 					
-				elif c == '3':
+				elif c[0] == '3':
 					while auth:
 						os.system('cls||clear')
 						c = input('1) Выйти\n0) Назад\n> ')
-						if c == '1':
+						if c[0] == '1':
 							exit(0)
-						elif c == '0':
+						elif c[0] == '0':
 							break
 
 

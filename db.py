@@ -46,7 +46,7 @@ class DB:
 
 	def ChangeSecretKey(self, login: str, masterKey: bytearray, newSecretKey: bytearray):
 		if not login in self.__table__:
-			raise Exception('don\'t exist')
+			raise Exception('Don\'t exist')
 		self.__table__[login][0] = S.EncryptAes256(newSecretKey, masterKey, self.__SHORT_SALT__).hex()
 
 
